@@ -1,0 +1,10 @@
+{
+  "name": "AI Annihilator",
+  "description": "ANNIHILATES Google's AI from your search engine :D :D :D :D :D :D :D :3 :D :D :D",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "test.html",
+    "default_icon": "test.png"
+  }
+}

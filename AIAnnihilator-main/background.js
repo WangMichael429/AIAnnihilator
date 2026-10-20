@@ -9,12 +9,20 @@ async function updateTab(tabId, changeInfo, tab) {
             var andPos = tab.url.indexOf("&");
             var newURL = tab.url.substring(0, andPos) + AIRemover + tab.url.substring(andPos);
             console.log("newURL: ", newURL);
-            await chrome.tabs.update(tab.id, {url: newURL});
+            try {
+                await chrome.tabs.update(tab.id, {url: newURL});
+            } catch (error) {
+                console.error(error);
+            }
         }
     } else {
         if (tab.url.startsWith(search) && tab.url.indexOf(AIRemover.trim()) > 0) {
             var newURL = tab.url.replace(AIRemover.trim(), "");
-            await chrome.tabs.update(tab.id, {url: newURL});
+            try {
+                await chrome.tabs.update(tab.id, {url: newURL});
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 }

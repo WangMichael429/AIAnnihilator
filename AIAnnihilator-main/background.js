@@ -6,6 +6,17 @@ var states = ['ON', 'OFF'];
 var AIRemover = methods[methods.length-1];
 console.log(AIRemover);
 
+async function disableRemover(tab) {
+    if (tab.url.startsWith(search) && tab.url.indexOf(AIRemover.trim()) >= 0) {
+        var newURL = tab.url.replace(AIRemover.trim(), "");
+        try {
+            await chrome.tabs.update(tab.id, {url: newURL});
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+
 async function updateTab(tabId, changeInfo, tab) {
     console.log(tab.url, changeInfo);
     var result = await browser.storage.local.get(['key']);
@@ -33,16 +44,11 @@ async function updateTab(tabId, changeInfo, tab) {
                     console.error(error);
                 }
             }
+        } else {
+            disableRemover(tab);
         }
     } else {
-        if (tab.url.startsWith(search) && tab.url.indexOf(AIRemover.trim()) > 0) {
-            var newURL = tab.url.replace(AIRemover.trim(), "");
-            try {
-                await chrome.tabs.update(tab.id, {url: newURL});
-            } catch (error) {
-                console.error(error);
-            }
-        }
+        disableRemover(tab);
     }
 }
 

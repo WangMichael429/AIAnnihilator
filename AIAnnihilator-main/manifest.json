@@ -1,7 +1,7 @@
 {
   "name": "AI Annihilator",
   "description": "ANNIHILATES Google's AI from your search engine :D :D :D :D :D :D :D :3 :D :D :D",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
